@@ -35,14 +35,14 @@ end
 function result = Forward(dia)
     for p = 1 : length(dia)
         for q = 1 : length(dia{p})
-            melhoravaliacao{p}(q) = dia{p}(q).melhoravaliacao; % Cria um cell-Array com as melhores avaliacoes de cada indivduo em cada periodo
+            melhoravaliacao{p}(q) = dia{p}(q).melhoravaliacao; % Createsa a cell array holding in each of its position the best generating units based on the Merit Order Dispatch Method for each period of the day
         end
-        best(p) = min(melhoravaliacao{p}); % Encontra o melhor valor dos melhores em cada periodo
+        best(p) = min(melhoravaliacao{p}); % Finds the best velues among the best for each period
     end   
     for i =1:length(dia)
         for j = 1:length(dia{i})
             if dia{i}(j).melhoravaliacao == best(i)
-                resultado{i} = dia{i}(j); % Encontra na matriz dia o melhor individuo que que possui o valor encontrado no vetor best
+                resultado{i} = dia{i}(j); % Finds in the cell array matrix day (dia) the unit that holds the best cost value among the units found in the array "best"
             end
         end
     end
