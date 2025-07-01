@@ -1,9 +1,11 @@
-%_________________________________________________________________________%
+% ======================================================================= %
 %                                                                         %
+%                          UNIT COMMITMENT ALGORITHM                      %
+%               (USING THE MERIT ORDER ECONOMIC DISPATCH METHOD)          %
 %                                                                         %
-%                        UNIT COMMITMENT ALGORITHM                        %
-%                                                                         %
-%_________________________________________________________________________%
+%                                    Developed by Joao Augusto Silva Ledo %
+% ======================================================================= %
+
 function result = UnitCommitment()
 
     clear all;
@@ -17,18 +19,18 @@ function result = UnitCommitment()
     max = [625, 625, 600, 500];  
     combinacoes = {[1,1,1,1],[1,1,1,0],[1,1,0,1],[1,1,0,0]};
 
-    mat_periodos = configuracaoDoDia(a,b,c,demanda,menor,max,combinacoes); % Cria a configuracao do dias em periodos sem os valors despachados
+    mat_periodos = configuracaoDoDia(a,b,c,demanda,menor,max,combinacoes); % Loads the daily settings in periods without the dispatched power
 
-    mat_periodos = Backward(mat_periodos); % Faz o movimento de Backward do Unit-Commitment fazendo o despacho e atribuindo valores de liga e desliga de cada individuo
+    mat_periodos = Backward(mat_periodos); % Unit Commitment Backward movement ON and OFF inputting values to the generating units
 
-    Final_Array = Forward(mat_periodos); % Faz o movimento Forward do Unit-Commitment montando o vetor de resposta final
+    Final_Array = Forward(mat_periodos); % Unit Commitment Forward movement creating the final output array with Dispatched Power Values
     
     result = Final_Array;
 end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                               FORWARD                                   %
+%                                FORWARD                                  %
 %_________________________________________________________________________%
 function result = Forward(dia)
     for p = 1 : length(dia)
