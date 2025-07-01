@@ -1,3 +1,10 @@
+% ======================================================================= %
+%                                                                         %
+%                    MERIT ORDER ECONOMIC DISPATCH METHOD                 %
+%                             (Considering loss)                          %
+%                                                                         %
+%                                    Developed by Joao Augusto Silva Ledo %
+% ======================================================================= %
 
 
 function result = despachoPerdas()
@@ -34,7 +41,7 @@ function result = despachoPerdas()
        
        k = k + 1;
     end
-    despacho.nome = 'Despacho com Perdas';
+    despacho.nome = 'Merit Order Dispatch Method Considering Loss';
     despacho.pg = pg{1}*100;
     despacho.preco = preco(k);
     despacho.iteracoes = k;
@@ -98,7 +105,7 @@ function result = calculoPerdas(newB, matB, pg)
 end
 
 function result = despachoMerito(valorA,valorB,demanda,min,max)
-    merito.nome = 'Despacho por Ordem de Merito';
+    merito.nome = 'Merit Order Dispatch Method';
  
     merito.pgDemanda = demanda;%[250, 350, 500, 700, 900, 1100, 1175, 1250];    
     a.valor = valorA;
