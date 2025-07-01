@@ -54,21 +54,21 @@ end
 %                               BACKWARD                                  %
 %_________________________________________________________________________%
 function result = Backward(dia)
-    dia = despacho(dia); % Despacha para cada individuo do dia de acordo com suas configuracoes
-    dia{6}(1).avaliacao = dia{6}(1).precos{1}; % o primeiro periodo tenha a avaliacao igual ao seu preco
+    dia = despacho(dia); % Dispatches each geneting units for the day according to its pre-setting
+    dia{6}(1).avaliacao = dia{6}(1).precos{1}; % The first period holds its evaluated value based on its cost
     for i = length(dia) : -1:1
              if i == 1
                 break; 
              end
         for k=1:length(dia{i-1})
             for j = 1 : length(dia{i})
-                dia{i-1}(k).avaliacao(j) = [Avaliacao(dia{i-1}(k),dia{i}(j))]; % calcula todas as possiveis avaliacoes de cada periodo para cada individuo
+                dia{i-1}(k).avaliacao(j) = [Avaliacao(dia{i-1}(k),dia{i}(j))]; % Calculates all possiable evaluated values of each generating unit for each period
             end
         end
     end
     for p = 1 : length(dia)
         for q = 1: length(dia{p}) 
-           dia{p}(q).melhoravaliacao = min(dia{p}(q).avaliacao); % encontra a melhor avaliacao de cada individuo em cada periodo
+           dia{p}(q).melhoravaliacao = min(dia{p}(q).avaliacao); % Finds the best evaluated value of ech generating unit for each period
            
         end
     end
@@ -77,7 +77,7 @@ end
     
 %_________________________________________________________________________%
 %                                                                         %
-%              FUNCAO AVALIACAO LIGA E DESLIGADO BACKWARD                 %
+%                 TURNING ON AND OFF FUNCTION BACKWARD MOVEMENT           %
 %_________________________________________________________________________%
 function result = Avaliacao(anterior,atual)
     T = 0;
@@ -97,7 +97,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                REALIZAR O DESPACHO PARA OS INDIVIDUOS                   %
+%       CALLS THE MERIT ORDER ECONOMIC DISPATCH FUNCTION FOR THE DAY      %
 %_________________________________________________________________________%
 function result = despacho(dia)
     for i = 1 : length(dia)
@@ -112,7 +112,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                CRIA A MATRIZ DE CONFIGURACOES DO DIA                    %
+%                CREATES THE SETTINGS MATRIX FOR THE DAY                  %
 %_________________________________________________________________________%
 function result = configuracaoDoDia(a,b,c,demanda,min,max,combinacoes)  
 
@@ -232,7 +232,8 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%          FAZ A MULTIPLICACAO DE LIGA E DESLIGA DOS INDIVIDUOS           %
+%        MULTIPLAY THE BINARY ON AND OFF ARRAY TO THE ACTUAL UNITS        %
+%                         TO BE TURNED ON AND OFF                         %
 %_________________________________________________________________________%
 function result = multiplicadorBinario(valor, binario)
     for i = 1 : length(valor)
@@ -249,10 +250,10 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                ALGORITMO DE DESPACHO POR ORDEM DE MERITO                %
+%               MERIT ORDER ECONOMIC DISPATCH METHOD FUNCTION             %
 %_________________________________________________________________________%
 function result = despachoMerito(valorA,valorB,valorC,demanda,min,max)
-    merito.nome = 'Despacho por Ordem de Merito';
+    merito.nome = 'Merit Order Economic Dispatch Method';
     merito.pgDemanda = demanda;
     a.valor = valorA;
     b.valor = valorB;
@@ -327,7 +328,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                CALCULO DO aTotal DO DESPACHO POR MERITO                 %
+% CALCULATES THE aTotal VALUE TO THE MERIT ORDER ECONOMIC DISPATCH METHOD %
 %_________________________________________________________________________%
 function result = aTotal(a)
     for i= 1:length(a.valor)
@@ -340,7 +341,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                CALCULO DO bTotal DO DESPACHO POR MERITO                 %
+% CALCULATES THE bTotal VALUE TO THE MERIT ORDER ECONOMIC DISPATCH METHOD %
 %_________________________________________________________________________%
 function result = bTotal(at,a,b)
     for i=1:length(a.valor)
@@ -353,7 +354,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%            CALCULO DA POTENCIA GERADA DO DESPACHO POR MERITO            %
+%  FINDS THE GENERATED POWER BY THE MERIT ORDER ECONOMIC DISPATCH METHOD  %
 %_________________________________________________________________________%
 function result = calculoPg(lambda, a, b)
 pg = (lambda - b)/a;
@@ -362,7 +363,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                CALCULO DO OBJETIVO DO DESPACHO POR MERITO               %
+%      OBJECTIVE FUNCTION OF THE MERIT ORDER ECONOMIC DISPATCH METHOD     %
 %_________________________________________________________________________%
 function result = objective(pg, a, b, c)
     result = (a/2)*pg^2+b*pg+c;
@@ -370,7 +371,7 @@ end
 
 %_________________________________________________________________________%
 %                                                                         %
-%                FUNCAO SOMA DE VALORES DE UM MESMO VETOR                 %
+%                       SUMMING ARRAY VALUES FUNCTION                     %
 %_________________________________________________________________________%
 function result=soma(x)
  soma = 0;
@@ -379,4 +380,4 @@ function result=soma(x)
  end
  result = soma;
 end
-%________________________________FIM______________________________________%
+%________________________________END______________________________________%
