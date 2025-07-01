@@ -1,7 +1,7 @@
 % ======================================================================= %
 %                                                                         %
 %                    MERIT ORDER ECONOMIC DISPATCH METHOD                 %
-%                             (Considering loss)                          %
+%                      (Considering transmission losses)                  %
 %                                                                         %
 %                                    Developed by Joao Augusto Silva Ledo %
 % ======================================================================= %
@@ -41,7 +41,7 @@ function result = despachoPerdas()
        
        k = k + 1;
     end
-    despacho.nome = 'Merit Order Dispatch Method Considering Loss';
+    despacho.nome = 'Merit Order Dispatch Method Considering transmission losses';
     despacho.pg = pg{1}*100;
     despacho.preco = preco(k);
     despacho.iteracoes = k;
@@ -49,7 +49,7 @@ function result = despachoPerdas()
     result = despacho;
 end
 
-function result = deltapreco(demanda, preco, pg, k, perda) % problema ? o pg muito pequenino
+function result = deltapreco(demanda, preco, pg, k, perda)
     if k == 1 
         deltaP = ((preco(k)-0)/(soma(pg{k})-0))*(demanda+perda(k)-soma(pg{k}));
     else
