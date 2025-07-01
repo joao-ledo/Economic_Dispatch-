@@ -1,7 +1,7 @@
 function result = despachoMerito()
     clear all;
     clc; 
-    merito.nome = 'Despacho por Ordem de Merito';
+    merito.nome = 'Merith Economic Dispatch Method';
  
     merito.pgDemanda = 500;%[250, 350, 500, 700, 900, 1100, 1175, 1250];    
     a.valor = [0.008, 0.0096];
