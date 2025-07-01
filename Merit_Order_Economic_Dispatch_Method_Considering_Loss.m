@@ -6,7 +6,6 @@
 %                                    Developed by Joao Augusto Silva Ledo %
 % ======================================================================= %
 
-
 function result = despachoPerdas()
     clear all;
     clc; 
@@ -58,7 +57,7 @@ function result = deltapreco(demanda, preco, pg, k, perda)
     result = abs(deltaP);
 end
 
-function result = solveSistemaLinear(a, b, lambda, matB) % O Pg tem que ser um n?mero bem maior
+function result = solveSistemaLinear(a, b, lambda, matB)
     [linha,coluna] = size(matB);
     for l = 1 : length(a)
         for c = 1 : length(a)
